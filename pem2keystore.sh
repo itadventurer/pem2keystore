@@ -26,8 +26,8 @@ if [ -z "$KEY_LOCATION" ] ; then
     keytool -keystore "$KEYSTORE_LOCATION" -import -file "$CERT_LOCATION" -storepass "$KEYSTORE_PASSWORD" -noprompt -alias "$KEY_ALIAS"
 else
     # If a key and a cert is given, create a keystore
-    PEMFILE=$(tempfile)
-    PKCS12FILE=$(tempfile)
+    PEMFILE=$(mktemp)
+    PKCS12FILE=$(mktemp)
     cat "$KEY_LOCATION" "$CERT_LOCATION" > $PEMFILE
 
     # Create pkcs12 file
